@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import OpenAI from 'openai';
+import DockerService from './docker/index.service';
 
 const modelsPlan = [
   {
@@ -22,10 +23,16 @@ const client = new OpenAI({
 
 @Injectable()
 export class AppService {
+  constructor() {}
+  DockerService = new DockerService();
   model = ['deepseek-chat', 'gpt-4o', 'gpt-4o-turbo'];
   // 生成ia代码文件
   async generateIaCode() {
     console.log('generateIaCode');
+  }
+
+  getContainers() {
+    return this.DockerService.getContainers();
   }
   // 组装提示词
   generatePrompt(msg: string) {
@@ -46,9 +53,10 @@ export class AppService {
   }
   async getHello(s: string) {
     const completion = await client.chat.completions.create({
-      messages: [{ role: 'system', content: this.generatePrompt(s) }],
-      model: this.model[1],
+      messages: [{ role: 'system', content: s }],
+      model: this.model[0],
     });
+    return completion.choices[0].message.content;
     return JSON.parse(
       completion.choices[0].message.content.replace(/```json|```/g, '').trim(),
     );
