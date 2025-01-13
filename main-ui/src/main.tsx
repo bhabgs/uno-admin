@@ -1,10 +1,18 @@
-import { StrictMode } from 'react';
-import { createRoot } from 'react-dom/client';
-import './styles/index.less';
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import { ConfigProvider } from 'antd';
+import microApp from '@micro-zoe/micro-app';
+import { setMicroTheme } from './utils';
+import theme from './theme';
 import App from './App.tsx';
+import '@/styles/reset.less';
 
-createRoot(document.getElementById('root')!).render(
-  <StrictMode>
-    <App />
-  </StrictMode>,
+microApp.start({});
+setMicroTheme(theme);
+ReactDOM.createRoot(document.getElementById('root')!).render(
+  <React.StrictMode>
+    <ConfigProvider theme={theme}>
+      <App />
+    </ConfigProvider>
+  </React.StrictMode>,
 );

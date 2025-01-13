@@ -4,6 +4,7 @@ node_modules
 ./server/**/dist
 ./server/**/node_modules
 /build
+_projects
 *.key
 # Logs
 logs

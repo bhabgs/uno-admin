@@ -1,5 +1,6 @@
 import { Controller, Get, Query } from '@nestjs/common';
 import { AppService } from './app.service';
+import data from './test';
 
 @Controller('aicode')
 export class AppController {
@@ -13,5 +14,13 @@ export class AppController {
   @Get()
   getHello(@Query('msg') msg: string) {
     return this.appService.getHello(msg);
+  }
+
+  @Get('generateIaCode')
+  generateIaCode() {
+    return this.appService.generateIaCode(
+      '../../_projects/createProjectFile',
+      data,
+    );
   }
 }
