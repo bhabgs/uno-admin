@@ -15,11 +15,8 @@ const createContainerConfig = (pathUrl: string) => {
           },
         ],
       },
-      Binds: [
-        `${pathUrl}/src/:/app/src`,
-        `${pathUrl}/index.html:/app/index.html`,
-        `${pathUrl}/vite.config.ts:/app/vite.config.ts`,
-      ],
+      Binds: [`${pathUrl}:/app`],
+      Cmd: ['sh', '-c', 'npm install && npm run dev'],
     },
   };
 };
@@ -34,7 +31,13 @@ export default class DockerService {
       this.previewContainer = await this.docker.createContainer(
         createContainerConfig(pathUrl),
       );
-      this.previewContainer.start();
+      this.previewContainer.start((err) => {
+        if (!err) {
+          console.log('容器启动成功');
+        } else {
+          console.log(`容器启动失败: ${err}`);
+        }
+      });
     }
     console.log('createContainer');
 
