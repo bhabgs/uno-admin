@@ -16,12 +16,11 @@ const createContainerConfig = (pathUrl: string) => {
         ],
       },
       Binds: [`${pathUrl}:/app`],
-      Cmd: ['sh', '-c', 'npm install && npm run dev'],
     },
   };
 };
 
-export default class DockerService {
+export class DockerService {
   docker = new dockerRode({
     socketPath: '/var/run/docker.sock',
   });
@@ -34,6 +33,16 @@ export default class DockerService {
       this.previewContainer.start((err) => {
         if (!err) {
           console.log('容器启动成功');
+          this.previewContainer.exec(
+            {
+              Cmd: ['sh', '-c', 'npm install && npm run dev'],
+            },
+            (err, exec) => {
+              if (!err) {
+                exec.start({ hijack: true, stdin: true }, () => {});
+              }
+            },
+          );
         } else {
           console.log(`容器启动失败: ${err}`);
         }
