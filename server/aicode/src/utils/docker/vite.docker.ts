@@ -7,20 +7,20 @@ const createContainerConfig = (pathUrl: string) => {
     ExposedPorts: {
       '5173/tcp': {},
     },
-    HostConfig: {
-      PortBindings: {
-        '5173/tcp': [
-          {
-            HostPort: '5173',
-          },
-        ],
+    NetworkingConfig: {
+      EndpointsConfig: {
+        'uno.app': {
+          Aliases: [''], // 网络别名
+        },
       },
+    },
+    HostConfig: {
       Binds: [`${pathUrl}:/app`],
     },
   };
 };
 
-export class DockerService {
+export class viteDockerService {
   docker = new dockerRode({
     socketPath: '/var/run/docker.sock',
   });
@@ -39,7 +39,21 @@ export class DockerService {
             },
             (err, exec) => {
               if (!err) {
-                exec.start({ hijack: true, stdin: true }, () => {});
+                exec.start({ hijack: true, stdin: true }, (err, stream) => {
+                  if (!err) {
+                    stream.on('data', (data) => {
+                      process.stdout.write(data.toString()); // 输出到控制台
+                    });
+
+                    stream.on('end', () => {
+                      console.log('\nExecution completed.');
+                    });
+
+                    stream.on('error', (error) => {
+                      console.error('Error with stream:', error);
+                    });
+                  }
+                });
               }
             },
           );

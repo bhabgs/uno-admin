@@ -1,13 +1,12 @@
 import { Injectable } from '@nestjs/common';
 import fs from 'fs';
 import path from 'path';
-import { DockerService } from './utils';
-import { OpenAi } from './utils/OpenAi';
+import { viteDockerService, OpenAi } from './utils';
 
 @Injectable()
 export class AppService {
   constructor() {}
-  DockerService = new DockerService();
+  DockerService = new viteDockerService();
   OpenAi = new OpenAi({
     id: 'deepseek-chat',
   });

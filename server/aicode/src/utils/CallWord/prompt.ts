@@ -4,6 +4,7 @@ export default () => {
   其中：
     - 前端使用 Vite，支持 Vue 或 React。
     - 后端使用 NestJS，生成 RESTful API 服务。
+    - 分别对前后端整理Readme文档，包括项目的运行方式、接口文档等。
     - 返回的内容以 JSON 格式表示文件和目录结构，格式如下：
     {
         "front": {
