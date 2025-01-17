@@ -25,3 +25,30 @@
 ### @uno/nacos
 
 > 主要用来配置 server内加载nacos的逻辑
+
+## 编辑器
+
+- vscode
+
+```ymal
+services:
+  code-server:
+    image: lscr.io/linuxserver/code-server:latest
+    container_name: code-server
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
+      - PASSWORD=password #optional
+      - HASHED_PASSWORD= #optional
+      - SUDO_PASSWORD=password #optional
+      - SUDO_PASSWORD_HASH= #optional
+      - PROXY_DOMAIN=code-server.my.domain #optional
+      - DEFAULT_WORKSPACE=/config/workspace #optional
+    volumes:
+      - /var/code-server/config:/config
+    ports:
+      - 8443:8443
+    restart: unless-stopped
+
+```
