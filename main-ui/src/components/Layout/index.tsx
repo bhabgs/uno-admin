@@ -2,7 +2,7 @@ import { Suspense } from 'react';
 import { Layout, ConfigProvider } from 'antd';
 import { observer } from 'mobx-react-lite';
 import { RouterProvider } from 'react-router-dom';
-import ThemeStore from '@/store/theme';
+import ThemeStore from '@/store/Theme';
 import Header from '@/components/Header';
 import SiderComonent from '@/components/Sider';
 import Tab from '@/components/Tab';

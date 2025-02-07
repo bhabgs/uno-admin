@@ -2,7 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 
 import microApp from '@micro-zoe/micro-app';
-import theme from './theme';
 import App from './App.tsx';
 import '@/styles/reset.less';
 

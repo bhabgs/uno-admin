@@ -1,8 +1,7 @@
-import Layout from '@/components/Layout';
-import Routers from './router';
+import Layout from '@/pages/Layout';
 
 const App: React.FC = () => {
-  return <Layout routers={Routers} />;
+  return <Layout />;
 };
 
 export default App;
