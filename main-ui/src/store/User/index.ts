@@ -1,6 +1,8 @@
 import { makeAutoObservable } from 'mobx';
+import FeatureRouters, { SelfRouteObject } from '@/router/feature';
 import { USER } from './dto';
 import { AuthRouters } from '@/router';
+import { MENU } from './dto/menu';
 
 class User {
   constructor() {
@@ -9,6 +11,23 @@ class User {
   }
   user: USER | null = null;
 
+  private fomatRouters: (defaultRouters: Array<SelfRouteObject>) => MENU[] = (
+    router,
+  ) => {
+    const menu: MENU[] = [];
+    router.forEach((item) => {
+      if (item.children) {
+        menu.push({
+          name: item.name!,
+          id: item.path,
+          path: item.path!,
+        });
+        this.fomatRouters(item.children);
+      }
+    });
+    return menu;
+  };
+
   private setUser = (user: USER) => {
     // 防止刷新页面数据丢失
     localStorage.setItem('user', JSON.stringify(user));
@@ -16,8 +35,13 @@ class User {
   };
   private getUser = () => {
     const user = localStorage.getItem('user');
+
     if (user) {
       this.user = JSON.parse(user);
+    }
+    if (this.user?.role === 'admin') {
+      const routers = this.fomatRouters(FeatureRouters);
+      this.user.menu = routers;
     }
   };
 

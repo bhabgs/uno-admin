@@ -1,8 +1,12 @@
+import { MENU } from './menu';
+
 export interface USER {
   token: string;
   role: 'admin' | 'user';
-  id: number;
+  id?: string;
   info: Record<string, string>;
+  roleKeys: string[];
+  menu?: MENU[];
 }
 export interface USERCreate {
   username: string;
