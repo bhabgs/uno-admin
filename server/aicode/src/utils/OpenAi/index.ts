@@ -42,8 +42,6 @@ export class OpenAi {
   }
 
   async sendMsg(msg: string, stream?: boolean) {
-    console.log(stream);
-
     if (!stream) {
       const completion = await this.client.chat.completions.create({
         messages: [

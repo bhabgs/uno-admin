@@ -89,6 +89,9 @@ importers:
       react-dom:
         specifier: ^18.3.1
         version: 18.3.1(react@18.3.1)
+      react-login-page:
+        specifier: ^1.0.4
+        version: 1.0.4(@babel/runtime@7.26.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       react-monaco-editor:
         specifier: ^0.56.2
         version: 0.56.2(@types/react@18.3.18)(monaco-editor@0.52.2)(react@18.3.1)
@@ -3935,6 +3938,13 @@ packages:
 
   react-is@18.3.1:
     resolution: {integrity: sha512-/LLMVyas0ljjAtoYiPqYiL8VWXzUUdThrmU5+n20DZv+a+ClRoevUzw5JxU+Ieh5/c87ytoTBV9G1FiKfNJdmg==}
+
+  react-login-page@1.0.4:
+    resolution: {integrity: sha512-6TxZMgA47M/ncnXLp18VMfvpemMMHmgvMikzljxtxO/8XegxYCRP8wySim6Tn9qLvGgctw88hNByhGU5Syp3Mg==}
+    peerDependencies:
+      '@babel/runtime': '>=7.11.0'
+      react: '>=16.8.0'
+      react-dom: '>=16.8.0'
 
   react-monaco-editor@0.56.2:
     resolution: {integrity: sha512-Tp5U3QF9h92Cuf0eIhGd8Jyef8tPMlEJC2Dk1GeuR/hj6WoFn8AgjVX/2dv+3l5DvpMUpAECcFarc3eFKTBZ5w==}
@@ -8972,6 +8982,12 @@ snapshots:
   react-is@16.13.1: {}
 
   react-is@18.3.1: {}
+
+  react-login-page@1.0.4(@babel/runtime@7.26.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
+    dependencies:
+      '@babel/runtime': 7.26.0
+      react: 18.3.1
+      react-dom: 18.3.1(react@18.3.1)
 
   react-monaco-editor@0.56.2(@types/react@18.3.18)(monaco-editor@0.52.2)(react@18.3.1):
     dependencies:

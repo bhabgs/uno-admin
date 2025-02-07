@@ -1,6 +1,6 @@
 import { mkdirSync, writeFileSync } from 'fs';
 import path from 'path';
-import { viteDockerService } from '../docker';
+import { DockerService } from '../docker';
 
 // 文件夹
 interface FolderItem {
@@ -11,7 +11,7 @@ export class ProjectManage {
   constructor({ workDir = '/var/aicode' }: { workDir?: string }) {
     this.workDir = workDir;
   }
-  docker = new viteDockerService();
+  docker = new DockerService();
   workDir: string;
   /**
    * @description: 创建项目
@@ -33,7 +33,7 @@ export class ProjectManage {
   }) {
     const Path = path.join(this.workDir, name);
     this.createFileOrFolder(Path, filesObj);
-    this.docker.createContainer(Path);
+    this.docker.create({ path: Path, onVscodeOver: async () => {} });
   }
 
   // 创建文件或文件夹
