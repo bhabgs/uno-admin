@@ -6,8 +6,4 @@ import App from './App.tsx';
 import '@/styles/reset.less';
 
 microApp.start({});
-ReactDOM.createRoot(document.getElementById('root')!).render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-);
+ReactDOM.createRoot(document.getElementById('root')!).render(<App />);

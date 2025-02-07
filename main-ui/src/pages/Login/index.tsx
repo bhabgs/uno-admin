@@ -1,45 +1,39 @@
-import Login, { Render } from 'react-login-page';
-import Logo from 'react-login-page/logo';
+import UserStore from '@/store/User';
+import LoginPage, {
+  Username,
+  Password,
+  Submit,
+  Title,
+  Logo,
+} from '@react-login-page/page1';
+import { observer } from 'mobx-react-lite';
 
-const LoginPage = () => {
+const styles = { height: '100%', width: '100%' };
+
+const Login = observer(() => {
   return (
-    <Login>
-      <Render>
-        {({ fields, buttons, blocks, $$index }) => {
-          return (
-            <div>
-              <header>
-                {blocks.logo} {blocks.title}
-              </header>
-              <div>
-                <label>{fields.username}</label>
-              </div>
-              <div>
-                <label>{fields.password}</label>
-              </div>
-              <div>
-                {buttons.submit}
-                {buttons.reset}
-              </div>
-            </div>
-          );
-        }}
-      </Render>
-      <Login.Block keyname="logo" tagName="span">
-        <Logo />
-      </Login.Block>
-      <Login.Block keyname="title" tagName="span">
-        Login
-      </Login.Block>
-      <Login.Input keyname="username" placeholder="Please input Username" />
-      <Login.Input keyname="password" placeholder="please enter password" />
-      <Login.Button keyname="submit" type="submit">
-        Submit
-      </Login.Button>
-      <Login.Button keyname="reset" type="reset">
-        Reset
-      </Login.Button>
-    </Login>
+    <div style={styles}>
+      <LoginPage>
+        <Username placeholder="用户名" name="userUserName" />
+        <Password placeholder="请输入密码" name="userPassword" />
+        <Submit
+          onClick={() => {
+            UserStore.login({
+              name: 'admin',
+              password: 'admin',
+            }).then(() => {
+              // 刷新页面回到首页
+              window.location.href = '/';
+            });
+          }}
+        >
+          登录
+        </Submit>
+        <Title />
+        <Logo>登录</Logo>
+      </LoginPage>
+    </div>
   );
-};
-export default LoginPage;
+});
+
+export default Login;

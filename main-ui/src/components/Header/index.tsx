@@ -1,5 +1,5 @@
 import { Layout, Button, ColorPicker } from 'antd';
-import ThemeStore from '@/store/theme';
+import ThemeStore from '@/store/Theme';
 import { observer } from 'mobx-react-lite';
 import { throttle } from '@/utils';
 

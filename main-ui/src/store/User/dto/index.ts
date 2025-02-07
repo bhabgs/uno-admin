@@ -1,5 +1,6 @@
 export interface USER {
   token: string;
+  role: 'admin' | 'user';
   id: number;
   info: Record<string, string>;
 }

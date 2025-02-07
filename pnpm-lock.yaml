@@ -68,6 +68,9 @@ importers:
       '@micro-zoe/micro-app':
         specifier: 1.0.0-rc.18
         version: 1.0.0-rc.18
+      '@react-login-page/page1':
+        specifier: ^1.0.4
+        version: 1.0.4(@babel/runtime@7.26.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       antd:
         specifier: ^5.23.0
         version: 5.23.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -1403,6 +1406,13 @@ packages:
     peerDependencies:
       react: '>=16.9.0'
       react-dom: '>=16.9.0'
+
+  '@react-login-page/page1@1.0.4':
+    resolution: {integrity: sha512-kzoKXIoXXMFAoR09AeE6fPluekp7RypCAJ6TK6/XBqnRb6rr7XkRtYJvmpqIDiLaHpMp+LKmZH9L38k2IHQ3CA==}
+    peerDependencies:
+      '@babel/runtime': '>=7.11.0'
+      react: '>=16.8.0'
+      react-dom: '>=16.8.0'
 
   '@rollup/plugin-typescript@12.1.2':
     resolution: {integrity: sha512-cdtSp154H5sv637uMr1a8OTWB0L1SWDSm1rDGiyfcGcvQ6cuTs4MDk2BVEBGysUWago4OJN4EQZqOTl/QY3Jgg==}
@@ -5675,6 +5685,13 @@ snapshots:
       rc-util: 5.44.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
+
+  '@react-login-page/page1@1.0.4(@babel/runtime@7.26.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+    dependencies:
+      '@babel/runtime': 7.26.0
+      react: 18.3.1
+      react-dom: 18.3.1(react@18.3.1)
+      react-login-page: 1.0.4(@babel/runtime@7.26.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
 
   '@rollup/plugin-typescript@12.1.2(rollup@4.29.1)(tslib@2.8.1)(typescript@5.7.2)':
     dependencies:

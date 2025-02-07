@@ -20,7 +20,7 @@ const App = observer((props: { routers: any }) => {
         },
       }}
     >
-      <Layout id="layerBody">
+      <Layout className={style.layerBody}>
         <Header />
         <Layout>
           <SiderComonent />
