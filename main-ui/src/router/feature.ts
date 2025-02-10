@@ -8,7 +8,12 @@ export interface SelfRouteObject extends NonIndexRouteObject {
 
 const FeatureRouters: SelfRouteObject[] = [
   {
-    path: '/menu',
+    path: 'home',
+    name: '首页',
+    Component: lazy(() => import('@/pages/Home')),
+  },
+  {
+    path: 'menu',
     name: '菜单管理',
     children: [
       {
@@ -19,7 +24,7 @@ const FeatureRouters: SelfRouteObject[] = [
     ],
   },
   {
-    path: '/user',
+    path: 'user',
     name: '用户管理',
     children: [
       {

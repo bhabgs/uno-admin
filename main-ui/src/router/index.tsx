@@ -1,7 +1,8 @@
 import { createHashRouter, Navigate } from 'react-router-dom';
 import Default from './default';
 import { USER } from '@/store/User/dto';
-import { lazy } from 'react';
+import Layout from '@/components/Layout';
+// import { lazy } from 'react';
 import FeatureRouters from './feature';
 
 // 根据权限动态生成路由
@@ -11,9 +12,9 @@ export const AuthRouters = (userInfo?: USER | null) => {
     return createHashRouter([
       {
         path: '/',
-        Component: lazy(() => import('@/pages/Home')),
+        element: <Layout />,
+        children: FeatureRouters,
       },
-      ...FeatureRouters,
     ]);
   }
   return createHashRouter([

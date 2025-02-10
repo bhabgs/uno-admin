@@ -14,6 +14,7 @@
     "@micro-zoe/micro-app": "1.0.0-rc.18",
     "@react-login-page/page1": "^1.0.4",
     "antd": "^5.23.0",
+    "axios": "^1.7.9",
     "classnames": "^2.5.1",
     "less": "^4.2.1",
     "mobx": "^6.13.5",
