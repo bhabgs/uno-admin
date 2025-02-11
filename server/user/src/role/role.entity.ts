@@ -1,23 +1,17 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { User } from 'src/user/user.entity';
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
 
 @Entity()
 export class Role {
   @PrimaryGeneratedColumn()
   id: number;
 
-  // 用户名
   @Column()
-  rolename: string;
+  name: string; // 角色名称
 
-  // 邮箱
   @Column()
-  email: string;
+  description: string; // 角色描述
 
-  // 密码
-  @Column()
-  password: string; // 密码会加密存储
-
-  // 昵称
-  @Column()
-  nickname: string;
+  @OneToMany(() => User, (user) => user.role)
+  users: User[];
 }

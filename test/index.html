@@ -1,39 +1,37 @@
+<!-- A页面 -->
 <!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <script
-      type="text/javascript"
-      src="https://webapi.amap.com/maps?v=2.0&key=a0675c34798d428e7a94fee6aac78904"
-    ></script>
+    <title>A Page</title>
   </head>
   <body>
-    <div class="log"></div>
-    <button class="bt" onclick="geo.getCurrentPosition()">获取位置</button>
-    <button class="bt" onclick="geo.watchPosition()">连续定位</button>
-    <button class="bt" onclick="geo.clearWatch()">停止定位</button>
-    <script type="text/javascript">
-      var log = document.getElementsByClassName('log')[0];
-      //   var map = new AMap.Map('container', {
-      //     resizeEnable: true,
-      //     zoom: 10,
-      //     center: [116.43, 39.9],
-      //   });
-      AMap.plugin(['AMap.Geolocation'], function () {
-        geo = new AMap.Geolocation({
-          useNative: true,
+    <button id="openBPage">Open B Page</button>
+
+    <script>
+      let bWindow;
+
+      setInterval(() => {
+        if (bWindow && bWindow.closed) {
+          // B页面已经关闭，清空bWindow
+          bWindow = null;
+          console.log('B页面已经关闭');
+        }
+      }, 100);
+      document
+        .getElementById('openBPage')
+        .addEventListener('click', function () {
+          if (bWindow && !bWindow.closed) {
+            // B页面已经打开，聚焦到B页面
+            bWindow.focus();
+            bWindow.location.href =
+              'https://www.baidu.com/?' + new Date().getTime();
+          } else {
+            // B页面未打开或已关闭，打开一个新的B页面
+            bWindow = window.open('https://www.baidu.com/', 'BPage');
+          }
         });
-        geo.on('complete', function (e) {
-          log.innerHTML +=
-            e.info + ' ' + e.position + ' ' + e.message.split('.')[0] + '</br>';
-        });
-        geo.on('fail', function (e) {
-          log.innerHTML += e.info + e.message.split('.')[0] + '</br>';
-        });
-        // map.addControl(geo);
-      });
     </script>
   </body>
 </html>

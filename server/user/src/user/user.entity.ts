@@ -1,4 +1,11 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Role } from 'src/role/role.entity';
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  ManyToOne,
+  JoinColumn,
+} from 'typeorm';
 
 @Entity()
 export class User {
@@ -13,6 +20,10 @@ export class User {
   @Column()
   email: string;
 
+  // 手机号
+  @Column({ default: '' })
+  phone: string;
+
   // 密码
   @Column()
   password: string; // 密码会加密存储
@@ -20,4 +31,8 @@ export class User {
   // 昵称
   @Column()
   nickname: string;
+
+  @ManyToOne(() => Role, (role) => role.users)
+  @JoinColumn({ name: 'roleId' })
+  role: Role; // 外键关联到角色表
 }
