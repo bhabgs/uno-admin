@@ -6,7 +6,7 @@ async function bootstrap() {
   const { port } = await startNacos('user');
 
   const app = await NestFactory.create(AppModule);
-
+  app.setGlobalPrefix('user');
   await app.listen(port);
 }
 bootstrap();

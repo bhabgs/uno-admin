@@ -1,0 +1,52 @@
+version: '3.7'
+
+services:
+  mysql:
+    image: mysql
+    container_name: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: 123456
+      MYSQL_DATABASE: uno
+      MYSQL_USER: bhabgs
+      MYSQL_PASSWORD: 123456
+    networks:
+      - net
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+
+  nacos:
+    image: nacos/nacos-server
+    container_name: nacos
+    environment:
+      - PREFER_HOST_MODE=hostname
+      - MODE=standalone
+      - NACOS_AUTH_IDENTITY_KEY=serverIdentity
+      - NACOS_AUTH_IDENTITY_VALUE=security
+      - NACOS_AUTH_TOKEN=SecretKey012345678901234567890123456789012345678901234567890123456789
+    ports:
+      - "8848:8848"
+    networks:
+      - net
+    volumes:
+      - nacos-data:/home/nacos/data
+
+  redis:
+    image: redis
+    container_name: redis
+    ports:
+      - "6379:6379"
+    restart: always
+    networks:
+      - net 
+
+networks:
+  net:
+    driver: bridge
+
+volumes:
+  mysql-data:
+    driver: local
+  nacos-data:
+    driver: local

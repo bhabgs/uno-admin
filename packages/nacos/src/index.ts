@@ -22,7 +22,7 @@ export const startNacos = async (serverName: string) => {
   let api = '/api';
   try {
     const nc = await getNacosConfig({
-      name: 'server.yaml',
+      name: 'server.yml',
     });
     serverPort = nc.servers[serverName].port;
     api = nc.servers[serverName].api;

@@ -62,7 +62,7 @@ export class AppService {
     api: string;
   }> {
     const { servers } = await getNacosConfig({
-      name: 'server.yaml',
+      name: 'server.yml',
     });
 
     for (const i of this.serviceList.data) {
