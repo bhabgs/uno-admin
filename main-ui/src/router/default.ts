@@ -14,5 +14,6 @@ export default [
   {
     path: '/register',
     name: 'Register',
+    Component: lazy(() => import('@/pages/Register')),
   },
 ];
