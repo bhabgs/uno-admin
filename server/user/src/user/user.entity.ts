@@ -17,7 +17,7 @@ export class User {
   username: string;
 
   // 邮箱
-  @Column()
+  @Column({ default: '' })
   email: string;
 
   // 手机号
@@ -29,7 +29,9 @@ export class User {
   password: string; // 密码会加密存储
 
   // 昵称
-  @Column()
+  @Column({
+    default: '',
+  })
   nickname: string;
 
   @ManyToOne(() => Role, (role) => role.users)

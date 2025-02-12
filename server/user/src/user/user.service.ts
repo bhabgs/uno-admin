@@ -4,6 +4,7 @@ import * as bcrypt from 'bcrypt';
 import { Repository } from 'typeorm';
 import { User } from './user.entity'; // 引入 User 实体
 import { Role } from 'src/role/role.entity';
+import { CreateUser } from './dto/user.dto';
 
 @Injectable()
 export class UserService {
@@ -18,7 +19,8 @@ export class UserService {
   //
 
   // 创建用户
-  async createUser(username: string, password: string): Promise<User> {
+  async createUser(opt: CreateUser): Promise<User> {
+    const { username, password, phone, email } = opt;
     // 先检查用户是否已存在
     const existingUser = await this.userRepository.findOne({
       where: { username },
@@ -34,6 +36,8 @@ export class UserService {
     const newUser = this.userRepository.create({
       username,
       password: hashedPassword,
+      phone,
+      email,
     });
     await this.userRepository.save(newUser);
     return newUser;

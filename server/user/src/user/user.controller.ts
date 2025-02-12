@@ -6,20 +6,22 @@ import {
   Param,
   Put,
   Delete,
+  Query,
 } from '@nestjs/common';
 import { UserService } from './user.service';
 import { User } from './user.entity';
 import { Role } from 'src/role/role.entity';
+import { CreateUser } from './dto/user.dto';
 
 @Controller()
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
   @Post()
-  async createUser(
-    @Body() body: { username: string; password: string },
-  ): Promise<User> {
-    return this.userService.createUser(body.username, body.password);
+  async createUser(@Body() body: CreateUser): Promise<User> {
+    console.log('创建用户', body);
+
+    return this.userService.createUser(body);
   }
 
   @Get(':id')
@@ -28,7 +30,9 @@ export class UserController {
   }
 
   @Get()
-  async getAllUsers(): Promise<User[]> {
+  async getAllUsers(@Query('name') name?: string): Promise<User[]> {
+    console.log('查询所有用户', name);
+
     return this.userService.findAllUsers();
   }
 

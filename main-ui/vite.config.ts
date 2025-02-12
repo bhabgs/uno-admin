@@ -9,11 +9,19 @@ export default defineConfig({
   server: {
     port: 5175,
     proxy: {
+      // 到网关
       '/api': {
-        target: 'http://localhost:3000',
+        target: 'http://localhost:8081',
         changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api/, ''),
       },
+
+      // 到用户服务
+      // '/api/v1/users': {
+      //   target: 'http://localhost:8080',
+      //   changeOrigin: true,
+      //   // 截取掉 /api/v1
+      //   rewrite: (path) => path.replace(/^\/api\/v1/, ''),
+      // },
     },
   },
   resolve: {

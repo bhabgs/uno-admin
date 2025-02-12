@@ -27,3 +27,9 @@ export const debounce = (fn: Function, delay: number) => {
     }, delay);
   };
 };
+
+// 密码必须包含数字、字母、特殊字符
+export const validatePassword = (password: string) => {
+  const reg = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[^a-zA-Z\d]).{8,16}$/;
+  return reg.test(password);
+};

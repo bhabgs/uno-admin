@@ -6,7 +6,7 @@ export const setToken = (newToken: string) => {
 };
 
 const remote = axios.create({
-  baseURL: '/api',
+  baseURL: '/api/v1',
 });
 
 remote.interceptors.request.use((config) => {

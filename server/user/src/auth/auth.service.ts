@@ -15,6 +15,7 @@ export class AuthService {
     // 查找用户
     const user = await this.userService.findOneByUsername(username);
     if (user && (await bcrypt.compare(pass, user.password))) {
+      //@ts-ignore
       const { ...result } = user;
       return result; // 返回不包含密码的用户信息
     }

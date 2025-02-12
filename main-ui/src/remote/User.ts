@@ -1,10 +1,21 @@
 import remote from './remote';
 
-// 查询菜单
-export const getUser = async () => {
-  const res = await remote.get('/user');
-  if (res.data) {
-    return res.data;
-  }
-  return [];
+// 创建用户
+export const createUser = async (data: {
+  username: string;
+  password: string;
+  email?: string;
+  phone?: string;
+}) => {
+  return remote.post('/users', data);
+};
+
+// 登录
+export const login = async (data: { username: string; password: string }) => {
+  return remote.post('/login', data);
+};
+
+// 查询所有用户
+export const getUsers = async () => {
+  return remote.get('/users');
 };
