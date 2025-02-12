@@ -1,5 +1,9 @@
 import { Injectable } from '@nestjs/common';
-import { createProxyMiddleware, RequestHandler } from 'http-proxy-middleware';
+import {
+  createProxyMiddleware,
+  RequestHandler,
+  fixRequestBody,
+} from 'http-proxy-middleware';
 import { NacosNamingClient } from 'nacos';
 import { serverList, getNacosConfig } from '@uno/nacos';
 import { IncomingMessage, ServerResponse } from 'http';
@@ -81,7 +85,6 @@ export class AppService {
     res: ServerResponse<IncomingMessage>,
   ) {
     const { serviceName, api } = await this.getServerName(req.url);
-
     const target =
       'http://' +
       this.serviceList.map[serviceName][0].ip +
@@ -94,9 +97,15 @@ export class AppService {
           return path.replace(api, '');
         },
         changeOrigin: true,
+        on: {
+          proxyReq: fixRequestBody,
+        },
       });
+      console.log('proxy start');
 
-      return proxy(req, res);
+      proxy(req, res, () => {
+        console.log('proxy end');
+      });
     } catch (error) {
       console.log('error :>> ', error);
     }
