@@ -8,8 +8,8 @@ import { Response } from 'express';
 import { Logger } from '@nestjs/common';
 
 @Catch(HttpException)
-export class AllExceptionsFilter implements ExceptionFilter {
-  private readonly logger = new Logger(AllExceptionsFilter.name);
+export class ErrExceptionsFilter implements ExceptionFilter {
+  private readonly logger = new Logger(ErrExceptionsFilter.name);
 
   catch(exception: HttpException, host: ArgumentsHost) {
     const ctx = host.switchToHttp();

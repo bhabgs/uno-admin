@@ -1,7 +1,7 @@
 import { Controller, Post, Body } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { AuthCredentialsDto } from './dto/auth-credentials.dto';
-import { ErrorService } from '@uno/nestjs-common-errors';
+import { ErrorService } from '@uno/nestjs-common-filter';
 
 @Controller('auth')
 export class AuthController {

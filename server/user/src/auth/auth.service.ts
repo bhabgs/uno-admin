@@ -3,7 +3,7 @@ import { JwtService } from '@nestjs/jwt';
 import { UserService } from '../user/user.service'; // 引入 UserService
 import { JwtPayload } from './dto/jwt-payload.interface';
 import * as bcrypt from 'bcrypt';
-import { ErrorService } from '@uno/nestjs-common-errors';
+import { ErrorService } from '@uno/nestjs-common-filter';
 import { RedisService } from '@uno/redis';
 
 @Injectable()

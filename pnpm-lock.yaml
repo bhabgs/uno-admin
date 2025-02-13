@@ -17,9 +17,9 @@ importers:
       '@uno/nacos':
         specifier: workspace:^
         version: link:packages/nacos
-      '@uno/nestjs-common-errors':
+      '@uno/nestjs-common-filter':
         specifier: workspace:^
-        version: link:packages/errorService
+        version: link:packages/serviceFilter
       '@uno/redis':
         specifier: workspace:^
         version: link:packages/redis
@@ -148,28 +148,6 @@ importers:
         specifier: ^6.0.5
         version: 6.0.6(@types/node@20.17.10)(less@4.2.1)(terser@5.37.0)(yaml@2.7.0)
 
-  packages/errorService:
-    dependencies:
-      '@nestjs/common':
-        specifier: ^10.0.0
-        version: 10.4.15(reflect-metadata@0.2.2)(rxjs@7.8.1)
-      '@types/express':
-        specifier: ^4.17.17
-        version: 4.17.21
-      express:
-        specifier: ^4.21.2
-        version: 4.21.2
-      ioredis:
-        specifier: ^5.5.0
-        version: 5.5.0
-      tslib:
-        specifier: ^2.8.1
-        version: 2.8.1
-    devDependencies:
-      typescript:
-        specifier: ^5.7.2
-        version: 5.7.2
-
   packages/micro-utils:
     dependencies:
       '@nestjs/common':
@@ -184,6 +162,9 @@ importers:
       ioredis:
         specifier: ^5.5.0
         version: 5.5.0
+      rxjs:
+        specifier: ^7.8.1
+        version: 7.8.1
       tslib:
         specifier: ^2.8.1
         version: 2.8.1
@@ -206,6 +187,9 @@ importers:
       ioredis:
         specifier: ^5.5.0
         version: 5.5.0
+      rxjs:
+        specifier: ^7.8.1
+        version: 7.8.1
       tslib:
         specifier: ^2.8.1
         version: 2.8.1
@@ -228,6 +212,34 @@ importers:
       ioredis:
         specifier: ^5.5.0
         version: 5.5.0
+      rxjs:
+        specifier: ^7.8.1
+        version: 7.8.1
+      tslib:
+        specifier: ^2.8.1
+        version: 2.8.1
+    devDependencies:
+      typescript:
+        specifier: ^5.7.2
+        version: 5.7.2
+
+  packages/serviceFilter:
+    dependencies:
+      '@nestjs/common':
+        specifier: ^10.0.0
+        version: 10.4.15(reflect-metadata@0.2.2)(rxjs@7.8.1)
+      '@types/express':
+        specifier: ^4.17.17
+        version: 4.17.21
+      express:
+        specifier: ^4.21.2
+        version: 4.21.2
+      ioredis:
+        specifier: ^5.5.0
+        version: 5.5.0
+      rxjs:
+        specifier: ^7.8.1
+        version: 7.8.1
       tslib:
         specifier: ^2.8.1
         version: 2.8.1

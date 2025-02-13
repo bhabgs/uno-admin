@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { ErrorService } from '@uno/nestjs-common-errors';
+import { ErrorService } from '@uno/nestjs-common-filter';
 import * as bcrypt from 'bcrypt';
 import { Repository } from 'typeorm';
 import { User } from './user.entity'; // 引入 User 实体
@@ -16,9 +16,11 @@ export class UserService {
 
   // 根据用户名查找用户
   findOneByUsername(username: string): Promise<User | undefined> {
-    // username 有可能是手机号，也有可能是邮箱
+    // username 有可能是手机号，也有可能是邮箱 返回数据要去掉密码
+
     return this.userRepository.findOne({
       where: [{ username: username }, { phone: username }, { email: username }],
+      select: ['id', 'username', 'phone', 'email', 'role'],
     });
   }
   //
@@ -50,19 +52,24 @@ export class UserService {
 
   // 查找用户
   async findUserById(id: any): Promise<User | undefined> {
-    return this.userRepository.findOne(id); // 根据 ID 查找用户
+    return this.userRepository.findOne({
+      where: { id },
+      select: ['id', 'username', 'phone', 'email', 'nickname'],
+    }); // 根据 ID 查找用户
   }
 
   // 查找所有用户
   async findAllUsers(): Promise<User[]> {
-    return this.userRepository.find(); // 查找所有用户
+    return this.userRepository.find({
+      select: ['id', 'username', 'phone', 'email', 'nickname'],
+    }); // 查找所有用户
   }
 
   // 更新用户角色
   async updateUserRole(id: number, role: Role): Promise<User> {
     const user = await this.findUserById(id);
     if (!user) {
-      throw new Error('User not found');
+      this.errorService.throwError('User not found', 404);
     }
     user.role = role;
     return this.userRepository.save(user); // 保存更新后的用户
@@ -72,7 +79,7 @@ export class UserService {
   async deleteUser(id: number): Promise<void> {
     const user = await this.findUserById(id);
     if (!user) {
-      throw new Error('User not found');
+      this.errorService.throwError('User not found', 404);
     }
     await this.userRepository.remove(user); // 删除用户
   }

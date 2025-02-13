@@ -7,7 +7,7 @@ import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
 import { JwtStrategy } from './strategies/jwt.strategy';
 import { UserModule } from '../user/user.module'; // 导入 UserModule
-import { ErrorService } from '@uno/nestjs-common-errors';
+import { ErrorService } from '@uno/nestjs-common-filter';
 import { RedisService } from '@uno/redis';
 
 @Module({

@@ -23,7 +23,7 @@
     "yaml": "^2.7.0",
     "@uno/nacos": "workspace:^",
     "@uno/micro-utils": "workspace:^",
-    "@uno/nestjs-common-errors": "workspace:^",
+    "@uno/nestjs-common-filter": "workspace:^",
     "@uno/redis": "workspace:^"
   },
   "devDependencies": {}
