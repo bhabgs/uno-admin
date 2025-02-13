@@ -8,6 +8,7 @@ export default defineConfig({
   plugins: [react()],
   server: {
     port: 5175,
+    host: '0.0.0.0',
     proxy: {
       // 到网关
       '/api': {

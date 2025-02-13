@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { ErrorService } from '@uno/nestjs-common-errors';
 import * as bcrypt from 'bcrypt';
 import { Repository } from 'typeorm';
 import { User } from './user.entity'; // 引入 User 实体
@@ -10,11 +11,15 @@ import { CreateUser } from './dto/user.dto';
 export class UserService {
   constructor(
     @InjectRepository(User) private readonly userRepository: Repository<User>, // 注入 UserRepository
+    private readonly errorService: ErrorService,
   ) {}
 
   // 根据用户名查找用户
   findOneByUsername(username: string): Promise<User | undefined> {
-    return this.userRepository.findOne({ where: { username } }); // 根
+    // username 有可能是手机号，也有可能是邮箱
+    return this.userRepository.findOne({
+      where: [{ username: username }, { phone: username }, { email: username }],
+    });
   }
   //
 
@@ -26,7 +31,7 @@ export class UserService {
       where: { username },
     });
     if (existingUser) {
-      throw new Error('User already exists');
+      this.errorService.throwError('User already exists', 409);
     }
 
     // 使用 bcrypt 加密密码

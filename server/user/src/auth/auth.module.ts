@@ -7,6 +7,8 @@ import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
 import { JwtStrategy } from './strategies/jwt.strategy';
 import { UserModule } from '../user/user.module'; // 导入 UserModule
+import { ErrorService } from '@uno/nestjs-common-errors';
+import { RedisService } from '@uno/redis';
 
 @Module({
   imports: [
@@ -21,7 +23,7 @@ import { UserModule } from '../user/user.module'; // 导入 UserModule
       }),
     }),
   ],
-  providers: [AuthService, JwtStrategy], // 提供 AuthService 和 JwtStrategy
+  providers: [AuthService, JwtStrategy, ErrorService, RedisService], // 提供 AuthService 和 JwtStrategy
   controllers: [AuthController],
 })
 export class AuthModule {}

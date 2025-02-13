@@ -12,7 +12,7 @@ export const createUser = async (data: {
 
 // 登录
 export const login = async (data: { username: string; password: string }) => {
-  return remote.post('/login', data);
+  return remote.post('/users/auth/login', data);
 };
 
 // 查询所有用户

@@ -1,6 +1,7 @@
 redis:
   port: 6379
   host: localhost
+  seconds: 86400
 mysql:
   port: 3306
   host: localhost
