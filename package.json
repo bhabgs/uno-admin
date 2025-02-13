@@ -22,7 +22,8 @@
     "typescript-eslint": "^8.18.2",
     "yaml": "^2.7.0",
     "@uno/nacos": "workspace:^",
-    "@uno/micro-utils": "workspace:^"
+    "@uno/micro-utils": "workspace:^",
+    "@uno/nestjs-common-errors": "workspace:^"
   },
   "devDependencies": {}
 }

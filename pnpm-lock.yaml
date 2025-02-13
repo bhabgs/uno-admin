@@ -17,6 +17,9 @@ importers:
       '@uno/nacos':
         specifier: workspace:^
         version: link:packages/nacos
+      '@uno/nestjs-common-errors':
+        specifier: workspace:^
+        version: link:packages/errorService
       eslint:
         specifier: ^9.17.0
         version: 9.17.0
@@ -142,13 +145,58 @@ importers:
         specifier: ^6.0.5
         version: 6.0.6(@types/node@20.17.10)(less@4.2.1)(terser@5.37.0)(yaml@2.7.0)
 
+  packages/errorService:
+    dependencies:
+      '@nestjs/common':
+        specifier: ^10.0.0
+        version: 10.4.15(reflect-metadata@0.2.2)(rxjs@7.8.1)
+      '@types/express':
+        specifier: ^4.17.17
+        version: 4.17.21
+      express:
+        specifier: ^4.21.2
+        version: 4.21.2
+      tslib:
+        specifier: ^2.8.1
+        version: 2.8.1
+    devDependencies:
+      typescript:
+        specifier: ^5.7.2
+        version: 5.7.2
+
   packages/micro-utils:
+    dependencies:
+      '@nestjs/common':
+        specifier: ^10.0.0
+        version: 10.4.15(reflect-metadata@0.2.2)(rxjs@7.8.1)
+      '@types/express':
+        specifier: ^4.17.17
+        version: 4.17.21
+      express:
+        specifier: ^4.21.2
+        version: 4.21.2
+      tslib:
+        specifier: ^2.8.1
+        version: 2.8.1
     devDependencies:
       typescript:
         specifier: ^5.7.2
         version: 5.7.2
 
   packages/nacos:
+    dependencies:
+      '@nestjs/common':
+        specifier: ^10.0.0
+        version: 10.4.15(reflect-metadata@0.2.2)(rxjs@7.8.1)
+      '@types/express':
+        specifier: ^4.17.17
+        version: 4.17.21
+      express:
+        specifier: ^4.21.2
+        version: 4.21.2
+      tslib:
+        specifier: ^2.8.1
+        version: 2.8.1
     devDependencies:
       typescript:
         specifier: ^5.7.2

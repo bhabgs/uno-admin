@@ -26,6 +26,10 @@
 
 > 主要用来配置 server内加载nacos的逻辑
 
+### @uno/nestjs-common-errors
+
+> 用于微服务统一处理异常
+
 ## 编辑器
 
 - vscode
