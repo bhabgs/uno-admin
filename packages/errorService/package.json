@@ -1,5 +1,5 @@
 {
-  "name": "@uno/nacos",
+  "name": "@uno/nestjs-common-errors",
   "version": "1.0.0",
   "type": "module",
   "description": "",
