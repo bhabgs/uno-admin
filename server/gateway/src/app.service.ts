@@ -7,9 +7,17 @@ import {
 import { NacosNamingClient } from 'nacos';
 import { serverList, getNacosConfig } from '@uno/nacos';
 import { IncomingMessage, ServerResponse } from 'http';
+import { RedisService } from '@uno/redis';
 
 @Injectable()
 export class AppService {
+  constructor(private readonly redisService: RedisService) {
+    getNacosConfig({
+      name: 'auth-whitelist.yml',
+    }).then(({ public_routes }) => {
+      this.whiteList = public_routes;
+    });
+  }
   // 客户端
   naming: NacosNamingClient;
 
@@ -80,11 +88,39 @@ export class AppService {
       }
     }
   }
+  whiteList = [];
+  // 校验token和白名单
+  async checkToken(req: IncomingMessage) {
+    const token = req.headers['authorization'];
+    if (this.whiteList.includes(req.url)) {
+      return true;
+    }
+    for (const i of this.whiteList) {
+      if (req.url.includes(i)) {
+        this.whiteList.push(req.url);
+        return true;
+      }
+    }
+    if (!token) {
+      return false;
+    }
+    const user = await this.redisService.getToken(token);
+    if (!user) {
+      return false;
+    }
+  }
   async createProxy(
     req: IncomingMessage,
     res: ServerResponse<IncomingMessage>,
   ) {
     const { serviceName, api } = await this.getServerName(req.url);
+    if (!this.checkToken(req)) {
+      return {
+        code: 401,
+        msg: 'token失效',
+      };
+    }
+
     const target =
       'http://' +
       this.serviceList.map[serviceName][0].ip +
@@ -101,11 +137,8 @@ export class AppService {
           proxyReq: fixRequestBody,
         },
       });
-      console.log('proxy start');
 
-      proxy(req, res, () => {
-        console.log('proxy end');
-      });
+      proxy(req, res);
     } catch (error) {
       console.log('error :>> ', error);
     }

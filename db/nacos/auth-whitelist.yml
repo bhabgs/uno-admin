@@ -1,0 +1,8 @@
+# auth-whitelist.yml
+
+public_routes:
+  - /auth/login
+  - /auth/register
+  - /auth/forgot-password
+  - /auth/reset-password
+  - /auth/refresh-token
