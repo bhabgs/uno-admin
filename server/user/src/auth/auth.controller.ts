@@ -15,6 +15,7 @@ export class AuthController {
       authCredentialsDto.username,
       authCredentialsDto.password,
     );
+
     if (user) {
       return this.authService.login(user);
     } else {

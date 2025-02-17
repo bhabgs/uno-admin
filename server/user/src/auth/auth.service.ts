@@ -17,17 +17,17 @@ export class AuthService {
 
   async validateUser(username: string, pass: string): Promise<any> {
     // username 有可能是手机号，也有可能是邮箱
-    const user = await this.userService.findOneByUsername(username);
+    const user = await this.userService.findUserByLogin(username);
 
-    if (user && !(await bcrypt.compare(pass, user.password))) {
-      this.errorService.throwError('密码错误', 401);
+    if (!user) {
+      this.errorService.throwError('用户不存在', 401);
     }
 
-    if (user && (await bcrypt.compare(pass, user.password))) {
+    if (await bcrypt.compare(pass, user.password)) {
       delete user.password;
       return user;
     }
-    return null;
+    this.errorService.throwError('密码错误', 401);
   }
 
   async login(user: any) {

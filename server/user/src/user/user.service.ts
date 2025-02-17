@@ -17,13 +17,19 @@ export class UserService {
   // 根据用户名查找用户
   findOneByUsername(username: string): Promise<User | undefined> {
     // username 有可能是手机号，也有可能是邮箱 返回数据要去掉密码
-
     return this.userRepository.findOne({
       where: [{ username: username }, { phone: username }, { email: username }],
       select: ['id', 'username', 'phone', 'email', 'role'],
     });
   }
-  //
+
+  // 根据用户名或邮箱登录查询
+  async findUserByLogin(username: string): Promise<User | undefined> {
+    // username 有可能是手机号，也有可能是邮箱 返回数据要去掉密码
+    return this.userRepository.findOne({
+      where: [{ username: username }, { phone: username }, { email: username }],
+    });
+  }
 
   // 创建用户
   async createUser(opt: CreateUser): Promise<User> {
