@@ -6,6 +6,11 @@ class themeStore {
   constructor() {
     makeAutoObservable(this);
   }
+  headerBackground = 'rgb(76 156 233)';
+  // 设置头部背景色
+  setHeaderBackground = (color: string) => {
+    this.headerBackground = color;
+  };
   // 设置主题色
   setThemeColor = (color: string) => {
     this.colorPrimary = color;
