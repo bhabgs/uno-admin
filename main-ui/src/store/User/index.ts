@@ -1,8 +1,9 @@
 import { makeAutoObservable } from 'mobx';
 import FeatureRouters, { SelfRouteObject } from '@/router/feature';
-import { USER } from './dto';
 import { AuthRouters } from '@/router';
-import { MENU } from './dto/menu';
+import { login } from '@/remote/User';
+import { MENU } from '@/remote/Menu/menu.dto';
+import { USER } from '@/remote/User/user.dto';
 
 class User {
   constructor() {
@@ -54,25 +55,25 @@ class User {
   }
 
   get token() {
-    return this.user?.token;
+    return this.user?.access_token;
   }
   // 登录
-  login = async (user: { name: string; password: string }) => {
-    // 实际对接需要改造 默认admin为管理员拥有所有权限
-    if (user.name === 'admin' && user.password === 'admin') {
-      this.setUser({
-        token: 'token',
-        role: 'admin',
-        id: 1,
-        info: {},
-      });
+  login = async (user: { username: string; password: string }) => {
+    try {
+      const res = await login(user);
+      console.log(res.data);
+
+      this.setUser(res.data);
       return Promise.resolve({
         type: true,
+        message: '登录成功',
+      });
+    } catch (error) {
+      return Promise.reject({
+        type: false,
+        message: error,
       });
     }
-    return Promise.reject({
-      type: false,
-    });
   };
 
   // 验证token

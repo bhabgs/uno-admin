@@ -1,4 +1,4 @@
-import remote from './remote';
+import remote from '../remote';
 
 // 查询菜单
 export const getMenu = async () => {

@@ -1,9 +1,11 @@
 import { Form, Input, Button } from 'antd';
 import style from '../Register/index.module.less';
-import { login } from '@/remote/User';
+import { observer } from 'mobx-react-lite';
+import UserStore from '@/store/User';
 
-const Reginter = () => {
+const Reginter = observer(() => {
   const [form] = Form.useForm();
+  const { login } = UserStore;
   return (
     <div className={style.body}>
       <div className={style.box}>
@@ -14,8 +16,6 @@ const Reginter = () => {
             form={form}
             className={style.formComponent}
             onFinish={(v) => {
-              console.log(v);
-
               login(v);
             }}
             labelCol={{ span: 8 }}
@@ -56,6 +56,6 @@ const Reginter = () => {
       </div>
     </div>
   );
-};
+});
 
 export default Reginter;

@@ -1,11 +1,18 @@
-import axios from 'axios';
+import axios, { AxiosInstance, AxiosResponse } from 'axios';
+
+// 定义通用响应结构
+interface ApiResponse<T> {
+  status: string;
+  message: string;
+  data: T;
+}
 
 let token = '';
 export const setToken = (newToken: string) => {
   token = newToken;
 };
 
-const remote = axios.create({
+const remote: AxiosInstance = axios.create({
   baseURL: '/api/v1',
 });
 
@@ -15,8 +22,8 @@ remote.interceptors.request.use((config) => {
 });
 
 remote.interceptors.response.use(
-  (response) => {
-    return response;
+  <T>(response: AxiosResponse<ApiResponse<T>>) => {
+    return response.data as unknown as AxiosResponse<ApiResponse<T>>;
   },
   (error) => {
     return Promise.reject(error);
