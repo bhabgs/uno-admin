@@ -10,6 +10,7 @@
   user-select: none;
   min-height: 20px;
   width: 100%;
+  margin-left: -1px;
   .tab {
     position: relative;
     background-color: transparent;
@@ -21,7 +22,7 @@
     transition: background-color 0.2s;
     cursor: pointer;
     position: relative;
-    margin-right: -1px;
+    margin-left: -2px;
     white-space: nowrap;
     flex: 1;
     overflow: hidden;
@@ -34,6 +35,10 @@
     }
     &.active {
       background-color: #fff;
+      border: 1px solid #e8e8e8;
+      position: relative;
+      margin-bottom: -1px;
+      border-bottom: none;
     }
     .closeButton {
       width: 10px;
