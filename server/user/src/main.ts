@@ -1,18 +1,24 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-import { startNacos } from '@uno/nacos';
+import * as dotenv from 'dotenv';
 import {
   ErrExceptionsFilter,
   SuccessExceptions,
 } from '@uno/nestjs-common-filter';
 
 async function bootstrap() {
-  const { port } = await startNacos('user');
+  const file =
+    process.env.NODE_ENV === 'production'
+      ? '.env.production'
+      : '.env.development';
+  dotenv.config({ path: file });
+  console.log(process.env.PORT);
+
   const app = await NestFactory.create(AppModule);
   app.setGlobalPrefix('users');
   app.useGlobalFilters(new ErrExceptionsFilter());
   app.useGlobalInterceptors(new SuccessExceptions());
 
-  await app.listen(port);
+  await app.listen(process.env.PORT);
 }
 bootstrap();
