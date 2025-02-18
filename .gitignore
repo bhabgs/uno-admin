@@ -1,5 +1,7 @@
 # compiled output
 dist
+uno-admin
+uno-admin.tgz
 node_modules
 ./server/**/dist
 ./server/**/node_modules

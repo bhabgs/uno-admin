@@ -6,6 +6,7 @@ export const pathResolve = (dir: string) => resolve(process.cwd(), '.', dir);
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react()],
+  base: './',
   server: {
     port: 5175,
     host: '0.0.0.0',
@@ -24,6 +25,9 @@ export default defineConfig({
       //   rewrite: (path) => path.replace(/^\/api\/v1/, ''),
       // },
     },
+  },
+  build: {
+    outDir: 'uno-admin',
   },
   resolve: {
     alias: {
