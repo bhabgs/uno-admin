@@ -61,8 +61,6 @@ class User {
   login = async (user: { username: string; password: string }) => {
     try {
       const res = await login(user);
-      console.log(res.data);
-
       this.setUser(res.data);
       return Promise.resolve({
         type: true,

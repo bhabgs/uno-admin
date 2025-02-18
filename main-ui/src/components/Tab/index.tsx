@@ -1,57 +1,54 @@
-import { useState } from 'react';
 import classnames from 'classnames';
 import styles from './index.module.less';
+import { observer } from 'mobx-react-lite';
+import MenuStore from '@/store/Menu';
 
-const menus = [
-  {
-    title: '首页',
+const TabItem = observer(
+  (props: {
+    title: string;
+    isActive: boolean;
+    onClick: () => void;
+    onClose: () => void;
+  }) => {
+    return (
+      <div
+        onClick={props.onClick}
+        className={classnames(styles.tab, {
+          [styles.active]: props.isActive,
+        })}
+      >
+        {props.title}
+        <span
+          className={styles.closeButton}
+          onClick={(e) => {
+            e.stopPropagation();
+            props.onClose();
+          }}
+        ></span>
+      </div>
+    );
   },
-  {
-    title: '文章',
-  },
-  {
-    title: '项目',
-  },
-  {
-    title: '关于',
-  },
-];
+);
 
-const TabItem = (props: {
-  title: string;
-  isActive: boolean;
-  onClick: () => void;
-}) => {
-  return (
-    <div
-      onClick={props.onClick}
-      className={classnames(styles.tab, {
-        [styles.active]: props.isActive,
-      })}
-    >
-      {props.title}
-      <span className={styles.closeButton}></span>
-    </div>
-  );
-};
-
-const Tab = () => {
-  const [active, setActive] = useState(0);
+const Tab = observer(() => {
   return (
     <nav className={styles.tabs}>
-      {menus.map((item, key) => {
+      {MenuStore.openMenus.map((item, key) => {
         return (
           <TabItem
             key={key}
-            title={item.title}
-            isActive={active === key}
+            title={item.name}
+            isActive={MenuStore.activeMenu === item.path}
             onClick={() => {
-              setActive(key);
+              MenuStore.setActiceMenu(item);
+            }}
+            onClose={() => {
+              MenuStore.closeMenu(item);
             }}
           />
         );
       })}
     </nav>
   );
-};
+});
 export default Tab;

@@ -1,13 +1,13 @@
-import { useSelfLocation } from '@/hooks/location';
-import UserStore from '@/store/User';
-import { MENU } from '@/store/User/dto/menu';
-import { Layout, Menu, theme } from 'antd';
 import { observer } from 'mobx-react-lite';
+import { Layout, Menu, theme } from 'antd';
 import { useNavigate } from 'react-router-dom';
+import { useSelfLocation } from '@/hooks/location';
+import MenuStore from '@/store/Menu';
+import { Menu as MenyType } from '@/store/Menu/menu.dto';
 
 const { Sider } = Layout;
 
-const generateMenuItems = (menuItems: MENU[]): any => {
+const generateMenuItems = (menuItems: MenyType[]): any => {
   return menuItems.map((item) => {
     if (item.children && item.children.length > 0) {
       return {
@@ -29,16 +29,19 @@ const SiderComonent = observer(() => {
   } = theme.useToken();
   const nav = useNavigate();
   const { locationPath, setLocationPath } = useSelfLocation();
+  const items = generateMenuItems(MenuStore.menus);
   return (
     <Sider width={200} style={{ background: colorBgContainer }}>
-      {UserStore.user?.menu && (
+      {MenuStore.menus && (
         <Menu
           mode="inline"
           selectedKeys={[locationPath]}
-          items={generateMenuItems(UserStore.user?.menu)}
+          items={items}
           onClick={({ key }) => {
-            nav(key);
+            const item = MenuStore.getItemByPath(key.toString());
+            MenuStore.openMenu(item!);
             setLocationPath(key.toString());
+            // nav(key);
           }}
         />
       )}
