@@ -17,15 +17,15 @@ const client = new NacosNamingClient({
   logger,
 });
 
-export const startNacos = async (serverName: string) => {
-  let serverPort = 3000;
-  let api = '/api';
+export const startNacos = async (
+  serverName: string,
+  serverPort = 3000,
+  api = '/api',
+) => {
   try {
     const nc = await getNacosConfig({
       name: 'server.yml',
     });
-    serverPort = nc.servers[serverName].port;
-    api = nc.servers[serverName].api;
     await client.ready();
     await client.registerInstance(serverName, {
       ip: 'localhost',

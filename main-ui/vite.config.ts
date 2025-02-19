@@ -13,8 +13,9 @@ export default defineConfig({
     proxy: {
       // 到网关
       '/api': {
-        target: 'http://localhost:8081',
+        target: 'http://localhost:3000',
         changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api/, ''),
       },
 
       // 到用户服务

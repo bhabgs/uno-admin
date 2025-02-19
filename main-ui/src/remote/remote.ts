@@ -13,7 +13,7 @@ export const setToken = (newToken: string) => {
 };
 
 const remote: AxiosInstance = axios.create({
-  baseURL: '/api/v1',
+  baseURL: '/api',
 });
 
 remote.interceptors.request.use((config) => {

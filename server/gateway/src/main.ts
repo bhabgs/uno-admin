@@ -4,8 +4,7 @@ import { startNacos } from '@uno/nacos';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  const { port, api } = await startNacos('gateway');
-  app.setGlobalPrefix(api);
+  const { port } = await startNacos('gateway');
 
   await app.listen(port);
 }
